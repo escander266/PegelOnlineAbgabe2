@@ -39,8 +39,7 @@ class PoRunner:
         self.ui.chbxShowLabels.toggled.connect(self.doToggleLabels)
         self.ui.chbxShowLabels.setEnabled(False)
 
-        #maptips
-        self.iface.actionMapTips().setChecked(True)
+
 
         #radio buttons
         self.ui.rbState.setEnabled(False)
@@ -140,6 +139,12 @@ class PoRunner:
         self.currentw.loadNamedStyle(os.path.join(self.local_dir, style))
         self.layerRefresh(self.currentw)
 
+        #maptips are set again whenever style changes
+        self.layer = self.iface.activeLayer()
+        self.layer.setMapTipTemplate('[%"shortname"%] level: [%"value"%], '
+                                        'state: [%"stateMnwMhw"%]')
+        self.iface.actionMapTips().setChecked(True)
+
     def layerRefresh(self, lyr):
         """Refreshes a layer in QGIS display"""
 
@@ -173,6 +178,12 @@ class PoRunner:
         # radio buttons
         self.ui.rbTrend.setEnabled(True)
         self.ui.rbState.setEnabled(True)
+
+        #maptips are enabled once layer is loaded
+        self.layer = self.iface.activeLayer()
+        self.layer.setMapTipTemplate('[%"shortname"%] level: [%"value"%], '
+                                        'state: [%"stateMnwMhw"%]')
+        self.iface.actionMapTips().setChecked(True)
 
     def onDeleteCurrentw(self):
         self.currentw = None
