@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PegelonlineDockWidgetBase</class>
+ <widget class="QDockWidget" name="PegelonlineDockWidgetBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>232</width>
+    <height>227</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Pegelonline</string>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents">
+   <layout class="QGridLayout">
+    <item row="13" column="0">
+     <widget class="PoGraph" name="poGraph" native="true"/>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Pegelonline</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="0">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="8" column="0">
+     <widget class="QCheckBox" name="chbxShowBasemap">
+      <property name="text">
+       <string>Show Basemap</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0">
+     <widget class="QRadioButton" name="rbState">
+      <property name="text">
+       <string>Display State</string>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">bgStylesCurrentW</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QPushButton" name="pbLoadCurrentW">
+      <property name="text">
+       <string>Load water levels</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QRadioButton" name="rbTrend">
+      <property name="text">
+       <string>Display Trend</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">bgStylesCurrentW</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="5">
+     <layout class="QHBoxLayout" name="hlTools">
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="pbDeselect">
+        <property name="text">
+         <string>Clear Selection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="9" column="0">
+     <widget class="QCheckBox" name="chbxShowLabels">
+      <property name="text">
+       <string>Show Labels</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PoGraph</class>
+   <extends>QWidget</extends>
+   <header>pegelonline.lv_customgraph</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="bgStylesCurrentW"/>
+ </buttongroups>
+</ui>
