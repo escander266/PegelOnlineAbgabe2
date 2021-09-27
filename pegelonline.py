@@ -23,9 +23,11 @@
 """
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtWidgets import QAction, QMessageBox
 # Initialize Qt resources from file resources.py
 from .resources import *
+
+from qgis.core import QgsProject
 
 # Import the code for the DockWidget
 from .pegelonline_dockwidget import PegelonlineDockWidget
@@ -46,6 +48,7 @@ class Pegelonline:
         """
         # Save reference to the QGIS interface
         self.iface = iface
+
 
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
@@ -192,6 +195,16 @@ class Pegelonline:
         # self.dockwidget = None
 
         self.pluginIsActive = False
+
+        if self.runner.currentw or self.runner.basemap_rivers:
+            result = QMessageBox.question(self.runner.ui, 'Closing', "Remove PegelOnline Layers?",
+                              QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+            if result == QMessageBox.Yes:
+                QgsProject.instance().removeMapLayer(self.runner.currentw)
+                QgsProject.instance().removeMapLayer(self.runner.basemap_rivers)
+            else:
+                return
 
 
     def unload(self):
