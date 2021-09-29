@@ -12,7 +12,6 @@ class PoGraph(QWidget):
     def __init__(self, parent=None):
         super().__init__()
 
-		# what Qt developers often do:
         # use a separate method to build the UI
         self.initUI()
 
@@ -29,7 +28,7 @@ class PoGraph(QWidget):
 
     # Slot to load new/next image
     def doLoadGraph(self):
-        # ur = Urlreader(poBaseURL + "/stations/BONN/W/measurements.png?start=P15D")
+
         station = quote(self.comboBox.currentText())
 
         # removes the graph once no station is selected
@@ -37,7 +36,7 @@ class PoGraph(QWidget):
             self.lbGraph.clear()
             return
 
-
+        # loads the data of the past 2 weeks
         url = poBaseURL + "stations/%s/W/measurements.png?start=P15D"%station
         print(url)
         ur = Urlreader(url)
@@ -45,7 +44,7 @@ class PoGraph(QWidget):
         img_data = ur.getDataResponse()
 
         # covert png-data into a pixmap
-        pixmap = QtGui.QPixmap() # add to imports: "from PyQt5 import QtGui"
+        pixmap = QtGui.QPixmap()
         pixmap.loadFromData(img_data)
         self.lbGraph.setPixmap(pixmap)
         # resize the label to fit the image dimensions
@@ -64,16 +63,3 @@ class PoGraph(QWidget):
         # sorts the list alphabetically
         self.comboBox.model().sort(0)
 
-# Tests
-##if __name__ == '__main__':
-##
-##    app = QApplication(sys.argv)
-##    w = PoGraph()
-##
-##    ur = Urlreader(poBaseURL + "stations.json")
-##    data = ur.getJsonResponse()
-##    w.setStations(data)
-##    # w.doLoadGraph()
-##
-##    w.show()
-##    app.exec_()

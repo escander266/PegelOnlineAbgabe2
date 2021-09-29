@@ -6,10 +6,6 @@ from urllib import request
 import urllib.parse
 import urllib.error
 
-## new: 04.06.
-# line 14: function quote
-# line 38,44: use self.url instead url
-# line 40: add in error-handling: self.code = e.code
 
 def quote(string_to_quote):
     return urllib.parse.quote(string_to_quote)
@@ -90,10 +86,6 @@ class Urlreader(object):
             result.path if len(result.path) > 0 else result.hostname
         )
 
-        # get file name from url
-##        file_name = self.url.split('/')[-1].split('?')[0]
-##        if not file_name:
-##            file_name = 'unknown.dat' # a default
         # join with destination dir
         file_name = os.path.realpath(os.path.join(dest, file_name))
         # open, write and close

@@ -2,8 +2,6 @@ from qgis.core import *
 # from pomodules.postations import PoStations
 from pomodules.poqgsstations import PoQgsStations
 
-# postats = PoStations()
-# result = postats.getData()
 
 postats = PoQgsStations()
 result = postats.getFeatures()

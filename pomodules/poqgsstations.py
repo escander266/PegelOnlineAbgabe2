@@ -9,8 +9,6 @@ class PoQgsStations(PoStations):
     def __init__(self):
         """init class"""
         super(PoQgsStations, self).__init__()
-        # or
-        # PoStations.__init__(self)
 
         self.fields = QgsFields()
 

@@ -8,8 +8,6 @@ class PoQgsCurrentw(Pocurrentw):
     def __init__(self):
         """init class"""
         super(PoQgsCurrentw, self).__init__()
-        # or
-        # PoStations.__init__(self)
 
         self.fields = QgsFields()
 

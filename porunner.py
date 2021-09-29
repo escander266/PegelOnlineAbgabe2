@@ -39,8 +39,6 @@ class PoRunner:
         self.ui.chbxShowLabels.toggled.connect(self.doToggleLabels)
         self.ui.chbxShowLabels.setEnabled(False)
 
-
-
         #radio buttons
         self.ui.rbState.setEnabled(False)
         self.ui.rbTrend.setEnabled(False)
@@ -100,21 +98,20 @@ class PoRunner:
 
     def deselect(self):
         self.layer = self.iface.activeLayer()
-        #layer.removeSelection()
 
+        # catches the error message when no layer is loaded yet
         if self.layer is None:
             result = QMessageBox.warning(self.ui, 'Warning', "Load data from Pegelonline first",
                               QMessageBox.Ok)
             if result == QMessageBox.Ok:
                 return
         else:
-            #layer = self.iface.activeLayer()
             self.layer.removeSelection()
 
     def doSelectionChanged(self, selection):
         #print(selection)
 
-
+        # creates an empty list and append each station entry with an id
         stations = []
 
         for id in selection:
@@ -124,6 +121,7 @@ class PoRunner:
 
         self.ui.poGraph.setStations(stations)
 
+        # changes zoom based on selection
         if selection:
             self.iface.actionZoomToSelected().trigger()
         else:
@@ -131,6 +129,8 @@ class PoRunner:
 
 
     def doCurrentWChangeStyle(self, button):
+
+        # applies styles based on radio button
         if button.objectName() == "rbState":
             style = "styles/stateMnwMhw.qml"
         elif button.objectName() == "rbTrend":
@@ -241,10 +241,8 @@ class PoRunner:
                 # signal&slot for layers willBeDeleted
                 self.basemap_rivers.willBeDeleted.connect(self.onDeleteBasemapRivers)
 
-
             else:
                 self.setLayerVisible(self.basemap_rivers, True)
-
 
         else:
            if self.basemap_rivers is not None:

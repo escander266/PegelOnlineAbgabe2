@@ -48,7 +48,6 @@ class Pegelonline:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Pegelonline')
-        # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'Pegelonline')
         self.toolbar.setObjectName(u'Pegelonline')
 
@@ -176,6 +175,7 @@ class Pegelonline:
 
         self.pluginIsActive = False
 
+        # asks user on whether all pegelonline layers are to be removed as well
         if self.runner.currentw or self.runner.basemap_rivers:
             result = QMessageBox.question(self.runner.ui, 'Closing', "Remove PegelOnline Layers?",
                               QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -214,10 +214,10 @@ class Pegelonline:
             #    first run of plugin
             #    removed on close (see self.onClosePlugin method)
             if self.dockwidget == None:
+
                 # Create the dockwidget (after translation) and keep reference
                 self.dockwidget = PegelonlineDockWidget()
 
-                ## NEW
                 # create runner class
                 self.runner = PoRunner (self.dockwidget, self.iface)
 
@@ -225,6 +225,5 @@ class Pegelonline:
             self.dockwidget.closingPlugin.connect(self.onClosePlugin)
 
             # show the dockwidget
-            # TODO: fix to allow choice of dock location
             self.iface.addDockWidget(Qt.RightDockWidgetArea, self.dockwidget)
             self.dockwidget.show()
