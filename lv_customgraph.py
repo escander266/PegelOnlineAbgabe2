@@ -61,6 +61,9 @@ class PoGraph(QWidget):
 
         self.comboBox.setCurrentIndex(0)
 
+        # sorts the list alphabetically
+        self.comboBox.model().sort(0)
+
 # Tests
 ##if __name__ == '__main__':
 ##
